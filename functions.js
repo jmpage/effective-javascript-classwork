@@ -296,6 +296,32 @@ function addg(total) {
   };
 }
 
+// First attempt:
+// function applyg(func) {
+//   return function (total) {
+//     if (total === undefined) { return; }
+//     return function adder(val) {
+//       if (val === undefined) { return total; }
+//       total = func(total, val);
+//       return adder;
+//     };
+//   };
+// }
+
+// Second attempt:
+function applyg(func) {
+  var total;
+  return function adder(val) {
+    if (val === undefined) { return total; }
+    if (total === undefined) {
+      total = val;
+    } else {
+      total = func(total, val);
+    }
+    return adder;
+  };
+}
+
 // Exercise 1
 log("\nExercise 1:");
 assertEqual(3, identity(3));
@@ -501,3 +527,11 @@ assertEqual(9, addg(2)(7)());
 assertEqual(7, addg(3)(4)(0)());
 assertEqual(15, addg(1)(2)(4)(8)());
 assertEqual(2, addg(0)(-1)(3)());
+
+// Exercise 30: Write a function applyg that will take a binary function and apply it to many invocations.
+log("\nExercise 30:");
+assertEqual(undefined, applyg(mul)());
+assertEqual(3, applyg(mul)(3)());
+assertEqual(60, applyg(mul)(3)(4)(5)());
+assertEqual(64, applyg(mul)(1)(2)(4)(8)());
+assertEqual(1, applyg(add)(0)(1)());
