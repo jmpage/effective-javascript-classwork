@@ -332,6 +332,17 @@ function arrayg(first) {
   return pusher(first);
 }
 
+// Reusing applyg
+// function arrayg(first) {
+//   if (first === undefined) { return []; }
+//   return applyg(
+//     function (array, value) {
+//       array.push(value);
+//       return array;
+//     }
+//   )([first]);
+// }
+
 // Exercise 1
 log("\nExercise 1:");
 assertEqual(3, identity(3));
