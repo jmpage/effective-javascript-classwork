@@ -322,6 +322,16 @@ function applyg(func) {
   };
 }
 
+function arrayg(first) {
+  var array = [];
+  function pusher(val) {
+    if (val === undefined) { return array; }
+    array.push(val);
+    return pusher;
+  };
+  return pusher(first);
+}
+
 // Exercise 1
 log("\nExercise 1:");
 assertEqual(3, identity(3));
@@ -535,3 +545,9 @@ assertEqual(3, applyg(mul)(3)());
 assertEqual(60, applyg(mul)(3)(4)(5)());
 assertEqual(64, applyg(mul)(1)(2)(4)(8)());
 assertEqual(1, applyg(add)(0)(1)());
+
+// Exercise 31: Write a function arrayg that will build an array from many invocations.
+log("\nExercise 31:");
+assertEqual([], arrayg());
+assertEqual([3], arrayg(3)());
+assertEqual([3, 4, 5], arrayg(3)(4)(5)());
