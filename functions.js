@@ -551,3 +551,6 @@ log("\nExercise 31:");
 assertEqual([], arrayg());
 assertEqual([3], arrayg(3)());
 assertEqual([3, 4, 5], arrayg(3)(4)(5)());
+
+// Exercise 32:
+log("\nExercise 32:");
