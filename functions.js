@@ -332,7 +332,7 @@ function arrayg(first) {
   return pusher(first);
 }
 
-// Reusing applyg
+// Reusing applyg:
 // function arrayg(first) {
 //   if (first === undefined) { return []; }
 //   return applyg(
@@ -342,6 +342,12 @@ function arrayg(first) {
 //     }
 //   )([first]);
 // }
+
+function unaryc(unary) {
+  return function(callback, arg) {
+    callback(unary(arg));
+  };
+}
 
 // Exercise 1
 log("\nExercise 1:");
@@ -563,5 +569,8 @@ assertEqual([], arrayg());
 assertEqual([3], arrayg(3)());
 assertEqual([3, 4, 5], arrayg(3)(4)(5)());
 
-// Exercise 32:
+// Exercise 32: Make a function that takes a unary function, and returns a
+//              function that takes an argument and a callback.
 log("\nExercise 32:");
+sqrtc = unaryc(Math.sqrt);
+sqrtc(log, 81); // 9
