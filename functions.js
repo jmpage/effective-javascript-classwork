@@ -349,10 +349,10 @@ function unaryc(unary) {
   };
 }
 
-function naryc(unary) {
+function naryc(func) {
   return function() {
     var callback = Array.prototype.shift.call(arguments);
-    callback(unary.apply(null, arguments));
+    callback(func.apply(null, arguments));
   };
 }
 
