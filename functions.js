@@ -472,18 +472,19 @@ var subm = applym(sub, '-');
 assertEqual( {value: -1, source: "(3-4)"}, subm(m(3), m(4)) );
 assertEqual( {value: 12, source: "(3*4)"}, applym(mul, "*")(m(3), m(4)) );
 
-// Exercise 26: modify applym so that numbers can be passed in as well as m objects
+// Exercise 26: Modify applym so that numbers can be passed in as well as m objects.
 log("\nExercise 26:");
 assertEqual( {value: -1, source: "(3-4)"}, subm(3, 4) );
 assertEqual( {value: 12, source: "(3*4)"}, applym(mul, "*")(3, m(4)) );
 
-// Exercise 27
+// Exercise 27: Write a function called exp which takes an array containing a 
+//              function to call and two parameters to pass to it.
 log("\nExercise 27:");
 var sae = [mul, 3, 3];
 assertEqual(9, exp(sae));
 assertEqual(42, exp(42));
 
-// Exercise 28: modify the exp function...
+// Exercise 28: Modify the exp function so that it can handle nested arrays.
 log("\nExercise 28:");
 var nae = [
   Math.sqrt,
@@ -491,7 +492,7 @@ var nae = [
 ];
 assertEqual(5, exp(nae));
 
-// Exercise 29: write a function addg that adds from many invocations, until it sees an empty invocation
+// Exercise 29: Write a function addg that adds from many invocations, until it sees an empty invocation.
 log("\nExercise 29:");
 assertEqual(undefined, addg());
 assertEqual(2, addg(2)());
