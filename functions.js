@@ -349,6 +349,15 @@ function unaryc(unary) {
   };
 }
 
+// Second attempt:
+function naryc(unary) {
+  return function() {
+    var callback = Array.prototype.shift.call(arguments);
+    callback(unary.apply(null, arguments));
+  };
+}
+
+
 // Exercise 1
 log("\nExercise 1:");
 assertEqual(3, identity(3));
@@ -572,5 +581,7 @@ assertEqual([3, 4, 5], arrayg(3)(4)(5)());
 // Exercise 32: Make a function that takes a unary function, and returns a
 //              function that takes an argument and a callback.
 log("\nExercise 32:");
-sqrtc = unaryc(Math.sqrt);
+var sqrtc = unaryc(Math.sqrt);
 sqrtc(log, 81); // 9
+var addc = naryc(add);
+addc(log, 1, 2); // 3
