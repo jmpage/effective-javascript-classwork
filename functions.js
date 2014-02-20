@@ -349,7 +349,6 @@ function unaryc(unary) {
   };
 }
 
-// Second attempt:
 function naryc(unary) {
   return function() {
     var callback = Array.prototype.shift.call(arguments);
