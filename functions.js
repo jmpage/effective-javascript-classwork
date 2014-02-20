@@ -451,7 +451,8 @@ assertEqual('H3', gensymhb());
 assertEqual('G6', gensymgb());
 assertEqual('H6', gensymhb());
 
-// Exercise 23
+// Exercise 23: Write a function fibonaccif which takes the first two digits of a fibonacci sequence and produces
+//              those digits then the next digits every time it is called.
 log("\nExercise 23:");
 var fib = fibonaccif(0, 1);
 assertEqual(0, fib());
@@ -461,12 +462,12 @@ assertEqual(2, fib());
 assertEqual(3, fib());
 assertEqual(5, fib());
 
-// Exercise 24
+// Exercise 24: Write a function addm which adds to m objects together.
 log("\nExercise 24:");
 assertEqual( {value: 7, source: "(3+4)"}, addm(m(3), m(4)) );
 assertEqual( {value: 4.141592653589793, source: "(1+pi)"}, addm(m(1), m(Math.PI, "pi")) );
 
-// Exercise 25
+// Exercise 25: Write a function applym which creates a funciton which applies a given function to two m objects.
 log("\nExercise 25:");
 var subm = applym(sub, '-');
 assertEqual( {value: -1, source: "(3-4)"}, subm(m(3), m(4)) );
