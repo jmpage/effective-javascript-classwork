@@ -260,7 +260,6 @@ function exp(args) {
 }
 
 // First attempt:
-//
 // function addg(val) {
 //   if (val === undefined) {
 //     return;
@@ -276,7 +275,6 @@ function exp(args) {
 // }
 
 // Second attempt:
-//
 // function addg(total) {
 //   if (total === undefined) { return; }
 //   return function adder(val) {
@@ -289,6 +287,7 @@ function exp(args) {
 //   };
 // }
 
+// Third attempt:
 function addg(total) {
   if (total === undefined) { return; }
   return function adder(val) {
