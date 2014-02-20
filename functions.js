@@ -300,10 +300,10 @@ function addg(total) {
 // function applyg(func) {
 //   return function (total) {
 //     if (total === undefined) { return; }
-//     return function adder(val) {
+//     return function applier(val) {
 //       if (val === undefined) { return total; }
 //       total = func(total, val);
-//       return adder;
+//       return applier;
 //     };
 //   };
 // }
@@ -311,14 +311,14 @@ function addg(total) {
 // Second attempt:
 function applyg(func) {
   var total;
-  return function adder(val) {
+  return function applier(val) {
     if (val === undefined) { return total; }
     if (total === undefined) {
       total = val;
     } else {
       total = func(total, val);
     }
-    return adder;
+    return applier;
   };
 }
 
