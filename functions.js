@@ -357,41 +357,44 @@ function naryc(func) {
 }
 
 
-// Exercise 1
+// Exercise 1: Write an identity function that takes an argument and returns
+//             that argument.
 log("\nExercise 1:");
 assertEqual(3, identity(3));
 
-// Exercise 2
+// Exercise 2: Write three binary functions, add, sub, and mul, that take two
+//             numbers and return their sum, difference and product.
 log("\nExercise 2:");
 assertEqual(7, add(3, 4));
 assertEqual(-1, sub(3, 4));
 assertEqual(12, mul(3, 4));
 
-// Exercise 3
+// Exercise 3: Write a function identityf that takes an argument and returns a
+//             function that returns that argument.
 log("\nExercise 3:");
 var idf3 = identityf(3);
 assertEqual(3, idf3());
 
-// Exercise 4
+// Exercise 4: Write a function addf that adds from two invocations.
 log("\nExercise 4:");
 assertEqual(7, addf(3)(4));
 
-// Exercise 5
+// Exercise 5: Write a function applyf that takes a binary function, and makes it
+//             callable with two invocations.
 log("\nExercise 5:");
 assertEqual(7, applyf(add)(3)(4));
 assertEqual(30, applyf(mul)(5)(6));
 
-// Exercise 6
+// Exercise 6: Write a function that takes a function and an argument, and
+//             returns a function that can take a second argument.
 log("\nExercise 6:");
 var add3 = curry(add, 3);
 assertEqual(7, add3(4));
-
-// Exercise 7
-log("\nExercise 7:");
 assertEqual(30, curry(mul, 5)(6));
 
-// Exercise 8
-log("\nExercise 8:");
+// Exercise 7: Without writing any new functions, show three ways to create the
+//             inc function.
+log("\nExercise 7:");
 var inc = curry(add, 1);
 assertEqual(6, inc(5));
 inc = applyf(add)(1);
@@ -399,34 +402,40 @@ assertEqual(7, inc(inc(5)));
 inc = addf(1);
 assertEqual(8, inc(7));
 
-// Exercise 9
-log("\nExercise 9:");
+// Exercise 8: Write a function twice that takes a binary function and returns a
+//             unary function that passes its argument to the binary function twice.
+log("\nExercise 8:");
 var doubl = twice(add);
 assertEqual(22, doubl(11));
 var square = twice(mul);
 assertEqual(121, square(11));
 
-// Exercise 10
-log("\nExercise 10:");
+// Exercise 9: Write switcheroo, a function that reverses the arguments of a
+//             binary function.
+log("\nExercise 9:");
 var bus = switcheroo(sub);
 assertEqual(-1, bus(3, 2));
 
-// Exercise 11
-log("\nExercise 11:");
+// Exercise 10: Write a function composeu that takes two unary functions and
+//              returns a unary function that calls them both.
+log("\nExercise 10:");
 assertEqual(36, composeu(doubl, square)(3));
 
-// Exercise 12
-log("\nExercise 12:");
+// Exercise 11: Write a function composeb that takes two binary functions and
+//              returns a function that calls them both.
+log("\nExercise 11:");
 assertEqual(25, composeb(add, mul)(2, 3, 5));
 
-// Exercise 13
-log("\nExercise 13:");
+// Exercise 12: Write a function that allows a binary function to be called only
+//              once.
+log("\nExercise 12:");
 var add_once = once(add);
 assertEqual(7, add_once(3, 4));
 assertEqual(undefined, add_once(3, 4));
 
-// Exercise 14
-log("\nExercise 14:");
+// Exercise 13: Write a fromTo function that produces a function that will
+//              produce values in a range.
+log("\nExercise 13:");
 var index = fromTo(0, 3);
 assertEqual(0, index());
 assertEqual(1, index());
@@ -434,8 +443,10 @@ assertEqual(2, index());
 assertEqual(undefined, index());
 assertEqual(undefined, index());
 
-// Exercise 15
-log("\nExercise 15:");
+// Exercise 14: Write an element function that takes an array and an optional
+//              function (like the result of fromTo) and produces a function
+//              that will produce the elements of the array.
+log("\nExercise 14:");
 var val = element([ 'a', 'b', 'c', 'd' ], fromTo(1, 3));
 assertEqual('b', val());
 assertEqual('c', val());
@@ -447,8 +458,9 @@ assertEqual('c', val2());
 assertEqual('d', val2());
 assertEqual(undefined, val2());
 
-// Exercise 16
-log("\nExercise 16:");
+// Exercise 15: Write a collect function that takes a function and an array and
+//              produces a function that will collect the results in the array.
+log("\nExercise 15:");
 var array = [];
 var col = collect(fromTo(1, 3), array);
 assertEqual(1, col());
@@ -456,8 +468,10 @@ assertEqual(2, col());
 assertEqual(undefined, col());
 assertEqual([1, 2], array);
 
-// Exercise 17
-log("\nExercise 17:");
+// Exercise 16: Write a filter function that takes a function and a predicate
+//              and produces a function that produces only the values approved
+//              by the predicate.
+log("\nExercise 16:");
 var fil = filter(fromTo(0, 5),
                  function thrid(value) {
                    return (value % 3) === 0;
@@ -466,8 +480,9 @@ assertEqual(0, fil());
 assertEqual(3, fil());
 assertEqual(undefined, fil());
 
-// Exercise 18
-log("\nExercise 18:");
+// Exercise 17: Write a concat function that takes two sequence generating
+//              functions and produces a function that combines the sequences.
+log("\nExercise 17:");
 var con = concat(fromTo(1, 3), fromTo(0, 2));
 assertEqual(1, con());
 assertEqual(2, con());
@@ -475,8 +490,9 @@ assertEqual(0, con());
 assertEqual(1, con());
 assertEqual(undefined, con());
 
-// Exercise 19
-log("\nExercise 19:");
+// Exercise 18: Write a counterf function that returns an object containing two
+//              functions that implement an up/down counter, hiding the counter.
+log("\nExercise 18:");
 var counter = counterf(10);
 var next = counter.next;
 var prev = counter.prev;
@@ -485,16 +501,20 @@ assertEqual(10, prev());
 assertEqual(9, prev());
 assertEqual(10, next());
 
-// Exercise 20
-log("\nExercise 20:");
+// Exercise 19: Make a revocable function that takes a nice function, and
+//              returns an object containing an invoke function that can invoke
+//              the nice function, and a revoke function that disables the
+//              invoke function.
+log("\nExercise 19:");
 var func = revocable(add);
 var invoke = func.invoke;
 assertEqual(7, invoke(3, 4));
 func.revoke();
 assertEqual(undefined, invoke(7, 8));
 
-// Exercise 21
-log("\nExercise 21:");
+// Exercise 20: Make a function gensymf that makes a function that generates
+//              unique symbols.
+log("\nExercise 20:");
 var gensymg = gensymf("G");
 var gensymh = gensymf("H");
 assertEqual('G1', gensymg());
@@ -502,8 +522,9 @@ assertEqual('H1', gensymh());
 assertEqual('G2', gensymg());
 assertEqual('H2', gensymh());
 
-// Exercise 22
-log("\nExercise 22:");
+// Exercise 21: Write a function gensymff that takes a unary function and a seed
+//              and returns a gensymf.
+log("\nExercise 21:");
 var gensymfb = gensymff(add3, 0);
 var gensymgb = gensymfb("G");
 var gensymhb = gensymfb("H");
@@ -512,9 +533,9 @@ assertEqual('H3', gensymhb());
 assertEqual('G6', gensymgb());
 assertEqual('H6', gensymhb());
 
-// Exercise 23: Write a function fibonaccif which takes the first two digits of a fibonacci sequence and produces
-//              those digits then the next digits every time it is called.
-log("\nExercise 23:");
+// Exercise 22: Make a function fibonaccif that returns a function that will
+//              return the next fibonacci number.
+log("\nExercise 22:");
 var fib = fibonaccif(0, 1);
 assertEqual(0, fib());
 assertEqual(1, fib());
@@ -523,39 +544,42 @@ assertEqual(2, fib());
 assertEqual(3, fib());
 assertEqual(5, fib());
 
-// Exercise 24: Write a function addm which adds to m objects together.
-log("\nExercise 24:");
+// Exercise 23: Write a function addm that takes two m objects and returns an m
+//              object.
+log("\nExercise 23:");
 assertEqual( {value: 7, source: "(3+4)"}, addm(m(3), m(4)) );
 assertEqual( {value: 4.141592653589793, source: "(1+pi)"}, addm(m(1), m(Math.PI, "pi")) );
 
-// Exercise 25: Write a function applym which creates a funciton which applies a given function to two m objects.
-log("\nExercise 25:");
+// Exercise 24: Write a function applym that takes a binary function and a
+//              string and returns a function that acts on m objects.
+log("\nExercise 24:");
 var subm = applym(sub, '-');
 assertEqual( {value: -1, source: "(3-4)"}, subm(m(3), m(4)) );
 assertEqual( {value: 12, source: "(3*4)"}, applym(mul, "*")(m(3), m(4)) );
 
-// Exercise 26: Modify applym so that numbers can be passed in as well as m objects.
-log("\nExercise 26:");
+// Exercise 25: Modify function liftm so that the functions it produces can
+//              accept arguments that are either numbers or m objects.
+log("\nExercise 25:");
 assertEqual( {value: -1, source: "(3-4)"}, subm(3, 4) );
 assertEqual( {value: 12, source: "(3*4)"}, applym(mul, "*")(3, m(4)) );
 
-// Exercise 27: Write a function called exp which takes an array containing a 
-//              function to call and two parameters to pass to it.
-log("\nExercise 27:");
+// Exercise 26: Write a function exp that evaluates simple array expressions.
+log("\nExercise 26:");
 var sae = [mul, 3, 3];
 assertEqual(9, exp(sae));
 assertEqual(42, exp(42));
 
-// Exercise 28: Modify the exp function so that it can handle nested arrays.
-log("\nExercise 28:");
+// Exercise 27: Modify exp to evaluate nested array expressions.
+log("\nExercise 27:");
 var nae = [
   Math.sqrt,
   [add, [square, 3], [square, 4]]
 ];
 assertEqual(5, exp(nae));
 
-// Exercise 29: Write a function addg that adds from many invocations, until it sees an empty invocation.
-log("\nExercise 29:");
+// Exercise 28: Write a function addg that adds from many invocations, until it
+//              sees an empty invocation.
+log("\nExercise 28:");
 assertEqual(undefined, addg());
 assertEqual(2, addg(2)());
 assertEqual(9, addg(2)(7)());
@@ -563,23 +587,25 @@ assertEqual(7, addg(3)(4)(0)());
 assertEqual(15, addg(1)(2)(4)(8)());
 assertEqual(2, addg(0)(-1)(3)());
 
-// Exercise 30: Write a function applyg that will take a binary function and apply it to many invocations.
-log("\nExercise 30:");
+// Exercise 29: Write a function applyg that will take a binary function and
+//              apply it to many invocations.
+log("\nExercise 29:");
 assertEqual(undefined, applyg(mul)());
 assertEqual(3, applyg(mul)(3)());
 assertEqual(60, applyg(mul)(3)(4)(5)());
 assertEqual(64, applyg(mul)(1)(2)(4)(8)());
 assertEqual(1, applyg(add)(0)(1)());
 
-// Exercise 31: Write a function arrayg that will build an array from many invocations.
-log("\nExercise 31:");
+// Exercise 30: Write a function arrayg that will build an array from many
+//              invocations.
+log("\nExercise 30:");
 assertEqual([], arrayg());
 assertEqual([3], arrayg(3)());
 assertEqual([3, 4, 5], arrayg(3)(4)(5)());
 
-// Exercise 32: Make a function that takes a unary function, and returns a
+// Exercise 31: Make a function that takes a unary function, and returns a
 //              function that takes an argument and a callback.
-log("\nExercise 32:");
+log("\nExercise 31:");
 var sqrtc = unaryc(Math.sqrt);
 sqrtc(log, 81); // 9
 var addc = naryc(add);
